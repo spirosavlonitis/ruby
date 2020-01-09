@@ -1,0 +1,39 @@
+Introduction to the Ruby Programming language
+
+1) Make sure you have ruby installed on you pc, if not go to https://youtu.be/sdenQm1Hn8A
+
+			$ ruby -v
+			ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux]
+			$ irb -v
+			irb 1.2.1 (2019-12-24)
+
+2) Make the directory in which we will be working:
+
+			$ mkdir -p ~/Tutorials/Ruby/Basics
+
+3) Open the folder we just created with the sublime text editor
+
+		If you don't have it installed go to https://youtu.be/YLVLHLX-c2Y
+
+4) Left click on the folder's name Basics and create a new file
+
+5) Press Ctrl + s to save the file as hello_world.rb
+
+6) Write this in the file and then save:
+
+			puts "Hello World!"
+
+7) Open your terminal and go to your work directory:
+
+			$ cd ~/Tutorials/Ruby/Basics
+
+8) Execute your script:
+
+			$ ruby hello_world.rb
+			Hello World!
+
+Congratulations on your first Ruby script!
+
+hello_world.rb:
+
+puts "Hello World!"

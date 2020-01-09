@@ -1,0 +1,104 @@
+Data Types available in Ruby
+
+This text is available in the description bellow.
+
+Here we will have a brief look at the data types that Ruby has available for you to work with.
+We will examine each one of them in more detail in future videos.
+
+In Ruby there are 2 basic data structures Scalars and Collections, but note that all data structures in Ruby are Objects.
+
+1) Scalars which hold a single value: an integer, float, string, symbol, boolean, or nil.
+
+					1		# Integer
+					1.1		# Float
+					"Foo"	# String
+					true	# Boolean
+					nil		# None Value
+					:bar	# Symbols
+
+	Because all Data Types are Objects they all have certain methods which you can call.
+	For instance you can call the Object#class method on every Object and it will tell you which calls it belongs to.
+	To do this open a terminal, start an irb session and type the following:
+
+					$ irb
+					irb(main):001:0> 1.class
+					=> Integer
+					irb(main):002:0> 1.1.class
+					=> Float
+					irb(main):003:0> "Foo".class
+					=> String
+					irb(main):004:0> true.class
+					=> TrueClass
+					irb(main):005:0> nil.class
+					=> NilClass
+					irb(main):006:0> :symbol.class
+					=> Symbol
+					irb(main):007:0> exit
+
+2) Collection data types.
+
+	a) Arrays are an ordered list of Scalars, other Arrays, Hashes, and other Objects.
+	   Arrays are created with the array literal contructor [], or with Array.new. Arrays in Ruby are dynamic meaning 
+	   that you don't have to set their size when you define them and that you can add to them elements without worry.
+
+	A quick irb example:
+	
+					$ irb
+					irb(main):001:0> [1, 1.1, "Foo", true, nil, [], {}, Object.new].class
+					=> Array
+					irb(main):002:0> Array.new(3).class
+					=> Array
+					irb(main):003:0> exit
+
+	b) Hashes also known in C jargon as associative arrays and in Python as dictionaries, are a key value assosiation, 
+       in which you can access the value that you want by using its unique key. Anything can be the value of a key.
+	   All keys in a hash must be unique although you can change the value of a key at any time.
+	   By convention the most widely used keys are Strings and Symbols, but you can also use any other data type that you wish!
+       Hashes are created either by their literal contructor {} or by Hash.new.
+	   Hashes in Ruby are also dynamic.
+	
+	A quick irb example:
+
+					$ irb		
+					irb(main):001:0> {"Foo" => "bar", 1 => 2, 1.1 => 2.2, true => false, :symbol => 
+					:bar, sugar: "coffee", Object.new => Object.new}.class
+					=> Hash
+					irb(main):002:0>  Hash.new(1).class
+					=> Hash
+					irb(main):003:0> exit
+
+	c) Enumerator is a collection that is usually creacted by call the each method of an Array or a Hash without a code block 
+	  (we will talk about code blocks in future videos) but you can also create them using Enumerator.new.
+	
+	An irb example:
+
+					$ irb
+					irb(main):001:0> [1, "A", 1.1, :symbol, Object.new].each.class
+					=> Enumerator
+					irb(main):002:0> Enumerator.new(1) { |y|  y << "a"}.class
+					=> Enumerator
+					irb(main):003:0> exit
+
+All of the examples above are written in the script bellow
+
+data_types.rb:
+
+# Scalars
+
+p(1.class) # Integer
+p 1.1.class # Float
+p "Foo".class # String
+p true.class # TrueClass
+p nil.class # NilClass
+p :symbol.class # Symbol
+
+# Collections
+
+p [1, 1.1, "Foo", true, nil, [], {}, Object.new].class # Array
+p Array.new(3).class # Array
+
+p({"Foo" => "bar", 1 => 2, 1.1 => 2.2, true => false, :symbol => :bar, sugar: "coffee", Object.new => Object.new}.class) # Hash
+p Hash.new(1).class # Hash
+
+p [1, "A", 1.1, :symbol, Object.new].each.class # Enumerator
+p Enumerator.new(1) { |y|  y << "a"}.class # Enumerator
