@@ -1,6 +1,6 @@
 Ruby Local Variables
 
-This text is available in the description bellow or at 
+This text is available in the description bellow or at: https://github.com/spirosavlonitis/ruby/blob/master/Descriptions/Basics/local_variables.txt
 
 	Type		Ruby convention			Nonconventional
 
@@ -124,6 +124,9 @@ b) In Ruby the convention is to use snake case for a variable's name i.e first_n
 d) Any value can be assigned to a local variable
 e) Local variables point to a specific  location in memory, changing that data will change the value of all variables that point to it.
 f) Local variables from different scopes can have the same name.
+
+
+Scipt is availeable at: https://github.com/spirosavlonitis/ruby/blob/master/Basics/local_variables.rb
 
 local_variables.rb
 
