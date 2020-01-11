@@ -97,7 +97,6 @@ Fire up an irb session and write the following
 				=> "bar"
 				irb(main):008:0> exit
 
-
 As you can see the a in my_function has a value of "foo" while the a at the main function has a value of "bar".
 Thus you can use the same name for a local variable in deferent scopes and their values will not collide.
 
@@ -126,7 +125,7 @@ e) Local variables point to a specific  location in memory, changing that data w
 f) Local variables from different scopes can have the same name.
 
 
-Scipt is availeable at: https://github.com/spirosavlonitis/ruby/blob/master/Basics/local_variables.rb
+Script is available at: https://github.com/spirosavlonitis/ruby/blob/master/Basics/local_variables.rb
 
 local_variables.rb
 
