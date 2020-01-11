@@ -1,0 +1,148 @@
+Ruby Local Variables
+
+This text is available in the description bellow or at 
+
+	Type		Ruby convention			Nonconventional
+
+	Local 	 	first_name 				firstName, _firstName, __firstName, name1
+
+Local variables start with a lowercase letter or an underscore and consist of letters, underscores, and/or digits.
+x , string , abc , start_value , and firstName are all valid local variable names. 
+Note however that in Ruby the convention is to use snake case variables rather than camel case (used in Java) so for example
+a snake case variable would be first_name while a camel case would be firstName.
+
+Any value can be assigned to a local variable, to assign a value to a variable start an irb session and do the following:
+
+				$ irb
+				irb(main):001:0> a = "foo"
+				irb(main):002:0> a
+				=> "foo"
+
+				The last line shows you what a evaluates to.
+
+For future reference note that when you assign a variable you are actually assigning what in C terms would be a pointer.
+In a = "foo" a points to a location in memory reserved for "foo", say that location for simplicity is location 180.
+Now if you assign a to another variable for instance b = a, at this moment b also points to the 180 memory location.
+At this moment if you were to call an "in place" function that changes the value of a, the value that b evaluates to will also change.
+
+				irb(main):003:0> b = a
+				irb(main):004:0> a.object_id
+				=> 180
+				irb(main):005:0> b.object_id
+				=> 180
+				irb(main):006:0> a.reverse!
+				=> "oof"
+				irb(main):007:0> a
+				=> "oof"
+				irb(main):008:0> b
+				=> "oof"
+		
+If you are to reassign a to another value say a = "bar" a will now point to a part in memory reserved to "bar" say 200, while b will still point to
+the part that was reserved for "foo" which is 180
+
+				irb(main):009:0> a = "bar"
+				irb(main):010:0> a.object_id
+				=> 200
+				irb(main):011:0> b
+				=> "oof"
+				irb(main):012:0> b.object_id
+				=> 180
+				irb(main):013:0> exit
+
+
+If for some reason you need the value of a variable assigned to an other variable but you might call an "in place" method on the original variable,
+then you can use the Object#dup or Objet#clone method. Both methods copy an object, the difference is that dup doesn’t copy the object attributes.
+
+				$ irb
+				irb(main):001:0> a = "a"
+				irb(main):002:0> b = a.clone
+				irb(main):003:0> a.upcase!
+				=> "A"
+				irb(main):004:0> a
+				=> "A"
+				irb(main):005:0> b
+				=> "a"
+				irb(main):006:0> exit
+
+Finally if you want to make sure that an "in place" method isn't called on a variable you can use the freeze method.
+
+				irb(main):001:0> a = "foo"
+				irb(main):002:0> a.freeze
+				=> "foo"
+				irb(main):003:0> b = a
+				irb(main):004:0> b.reverse!
+				...
+				FrozenError (can't modify frozen String: "foo")
+				irb(main):005:0> exit
+
+The scope of a local variable is as the name implies local.
+The local scope changes when ever you define a class, module, function, to make it easier just remember that 
+when you see these key words class , module , and def you are entering a new scope which closes with the end key word.
+
+We will view scopes in more detail on later videos.
+
+Fire up an irb session and write the following
+
+				$ irb
+				irb(main):001:0> a = "bar"  # Top level scope
+				irb(main):002:1* def my_function   # my_function scope opens
+				irb(main):003:1*   a = "foo"
+				irb(main):004:1*   puts a
+				irb(main):005:0> end               # my_function scope closes
+				=> :my_function
+				irb(main):006:0> my_function
+				foo
+				=> nil
+				irb(main):007:0> a
+				=> "bar"
+				irb(main):008:0> exit
+
+
+As you can see the a in my_function has a value of "foo" while the a at the main function has a value of "bar".
+Thus you can use the same name for a local variable in deferent scopes and their values will not collide.
+
+You can find the local variables at any given time using the local_variables method
+
+				$ irb
+				irb(main):001:0> a = "foo"
+				irb(main):002:0> b = 1
+				irb(main):003:0> c = 1.1
+				irb(main):004:0> d = :symbol
+				irb(main):005:0> e = true
+				irb(main):006:0> f = nil
+				irb(main):007:0> g = Object.new
+				irb(main):008:0> h = [a, b, c, d, e, f, g]
+				irb(main):009:0> i = {key: "value"}
+				irb(main):010:0> local_variables
+				=> [:i, :h, :g, :f, :e, :d, :c, :b, :a, :_]
+				irb(main):011:0> exit
+
+What you have learned:
+
+a) Local variables start with a lowercase letter or an underscore and consist of letters, underscores, and/or digits.
+b) In Ruby the convention is to use snake case for a variable's name i.e first_name.
+d) Any value can be assigned to a local variable
+e) Local variables point to a specific  location in memory, changing that data will change the value of all variables that point to it.
+f) Local variables from different scopes can have the same name.
+
+local_variables.rb
+
+
+def my_method
+	a = "foo"
+	puts a
+end
+
+a = "bar"
+
+my_method	# foo
+
+b = 1
+c = 1.1
+d = :symbol
+e = true
+f = nil
+g = Object.new
+h = [a, b, c, d, e, f, g]
+i = {key: "value"}
+p local_variables	# [:i, :h, :g, :f, :e, :d, :c, :b, :a, :_]
